@@ -8,6 +8,14 @@ function Book(title, author, pages, read) {
     }
 }
 
-const theHobbit = new Book("theBook", "J.R.R. Tolkien", "295", "not read yet");
+const myLibrary = [];
 
-console.log(theHobbit.info())
+function addBookToLibrary(title, author, pages, read) {
+    myLibrary.push(new Book(title, author, pages, read))
+}
+
+addBookToLibrary("The Hobbit", "j.j.Tolkin", 295, "not read yet")
+addBookToLibrary("Best Book", "James Donald", 129, "read")
+addBookToLibrary("Unknown soldier", "Thomas", 854, "not read yet")
+
+console.log(myLibrary)
