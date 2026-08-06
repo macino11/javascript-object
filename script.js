@@ -1,4 +1,5 @@
 function Book(title, author, pages, read) {
+  this.id = crypto.randomUUID();
   this.title = title;
   this.author = author;
   this.pages = pages;
@@ -18,15 +19,29 @@ addBookToLibrary("The Hobbit", "j.j.Tolkin", 295, "not read yet");
 addBookToLibrary("Best Book", "James Donald", 129, "read");
 addBookToLibrary("Unknown soldier", "Thomas", 854, "not read yet");
 
-const booksDiv = document.getElementById("books-div");
+
+const booksBody = document.getElementById("books-body");
 
 function displayEachBook(myLibrary) {
   for (let i = 0; i < myLibrary.length; i++) {
-    const bookCard = document.createElement("div");
-    bookCard.textContent = myLibrary[i].info();
-    booksDiv.appendChild(bookCard);
+    const row = document.createElement("tr")
+    const titleCell = document.createElement("td")
+    const authorCell = document.createElement("td")
+    const pagesCell = document.createElement("td")
+    const readCell = document.createElement("td")
+
+    titleCell.textContent = myLibrary[i].title
+    authorCell.textContent = myLibrary[i].author
+    pagesCell.textContent = myLibrary[i].pages
+    readCell.textContent = myLibrary[i].read
+    
+    
+    booksBody.appendChild(row) 
+    row.appendChild(titleCell) 
+    row.appendChild(authorCell) 
+    row.appendChild(pagesCell) 
+    row.appendChild(readCell) 
   }
-  return booksDiv.textContent;
 }
 
-displayEachBook(myLibrary);
+displayEachBook(myLibrary)
