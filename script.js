@@ -15,10 +15,23 @@ function addBookToLibrary(title, author, pages, read) {
   myLibrary.push(new Book(title, author, pages, read));
 }
 
-addBookToLibrary("The Hobbit", "J.J.Tolkin", 295, "not read yet");
-addBookToLibrary("Best Book", "James Donald", 129, "read");
-addBookToLibrary("Unknown Soldier", "Thomas", 854, "not read yet");
-addBookToLibrary("House of The Dragons", "J.J.Tolkien", 520, "read");
+const submitBtn = document.getElementById("submit-btn");
+
+const title = document.getElementById("title");
+const author = document.getElementById("author");
+const pages = document.getElementById("pages");
+const read = document.getElementById("read");
+
+submitBtn.addEventListener("click", (event) => {
+  event.preventDefault();
+  let bookTitle = title.value;
+  let bookAuthor = author.value;
+  let bookPages = pages.value;
+  let bookRead = read.value;
+  addBookToLibrary(bookTitle, bookAuthor, bookPages, bookRead);
+  console.log(myLibrary);
+  displayEachBook(myLibrary);
+});
 
 const booksBody = document.getElementById("books-body");
 
@@ -30,24 +43,20 @@ function displayEachBook(myLibrary) {
     const pagesCell = document.createElement("td");
     const readCell = document.createElement("td");
 
+
     titleCell.textContent = myLibrary[i].title;
     authorCell.textContent = myLibrary[i].author;
     pagesCell.textContent = myLibrary[i].pages;
     readCell.textContent = myLibrary[i].read;
 
-    booksBody.appendChild(row);
     row.appendChild(titleCell);
     row.appendChild(authorCell);
     row.appendChild(pagesCell);
     row.appendChild(readCell);
+
+    booksBody.appendChild(row);
+
   }
 }
 
 
-
-displayEachBook(myLibrary);
-
-const submitBtn = document.querySelector("#submit-btn")
-submitBtn.addEventListener("click", () => {
-    return addBookToLibrary()
-})
