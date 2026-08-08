@@ -15,33 +15,39 @@ function addBookToLibrary(title, author, pages, read) {
   myLibrary.push(new Book(title, author, pages, read));
 }
 
-addBookToLibrary("The Hobbit", "j.j.Tolkin", 295, "not read yet");
+addBookToLibrary("The Hobbit", "J.J.Tolkin", 295, "not read yet");
 addBookToLibrary("Best Book", "James Donald", 129, "read");
-addBookToLibrary("Unknown soldier", "Thomas", 854, "not read yet");
-
+addBookToLibrary("Unknown Soldier", "Thomas", 854, "not read yet");
+addBookToLibrary("House of The Dragons", "J.J.Tolkien", 520, "read");
 
 const booksBody = document.getElementById("books-body");
 
 function displayEachBook(myLibrary) {
   for (let i = 0; i < myLibrary.length; i++) {
-    const row = document.createElement("tr")
-    const titleCell = document.createElement("td")
-    const authorCell = document.createElement("td")
-    const pagesCell = document.createElement("td")
-    const readCell = document.createElement("td")
+    const row = document.createElement("tr");
+    const titleCell = document.createElement("td");
+    const authorCell = document.createElement("td");
+    const pagesCell = document.createElement("td");
+    const readCell = document.createElement("td");
 
-    titleCell.textContent = myLibrary[i].title
-    authorCell.textContent = myLibrary[i].author
-    pagesCell.textContent = myLibrary[i].pages
-    readCell.textContent = myLibrary[i].read
-    
-    
-    booksBody.appendChild(row) 
-    row.appendChild(titleCell) 
-    row.appendChild(authorCell) 
-    row.appendChild(pagesCell) 
-    row.appendChild(readCell) 
+    titleCell.textContent = myLibrary[i].title;
+    authorCell.textContent = myLibrary[i].author;
+    pagesCell.textContent = myLibrary[i].pages;
+    readCell.textContent = myLibrary[i].read;
+
+    booksBody.appendChild(row);
+    row.appendChild(titleCell);
+    row.appendChild(authorCell);
+    row.appendChild(pagesCell);
+    row.appendChild(readCell);
   }
 }
 
-displayEachBook(myLibrary)
+
+
+displayEachBook(myLibrary);
+
+const submitBtn = document.querySelector("#submit-btn")
+submitBtn.addEventListener("click", () => {
+    return addBookToLibrary()
+})

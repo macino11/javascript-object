@@ -9,9 +9,7 @@
   </head>
   <body>
     <table id="books-table">
-      <caption>
-        
-      </caption>
+      <caption></caption>
       <thead>
         <tr>
           <th>Title</th>
@@ -21,11 +19,33 @@
         </tr>
       </thead>
       <tbody id="books-body">
-       
+        <button id="new-book-btn">New Book</button>
+
+        <button command="show-modal" commandfor="my-dialog">Open dialog</button>
+
+        <dialog id="my-dialog">
+          <form method="post" class="book-form">
+            <div class="book-form">
+              <label for="title">Title:</label>
+              <input type="text" id="title" name="title" />
+            </div>
+            <div class="book-form">
+              <label for="author">Author:</label>
+              <input type="text" id="author" name="author" />
+            </div>
+            <div class="book-form">
+              <label for="pages">Pages:</label>
+              <input type="text" id="pages" name="pages" />
+            </div>
+            <div class="book-form">
+              <label for="read">Read:</label>
+              <input type="text" id="read" name="read" />
+            </div>
+            <button id="submit-btn">Submit</button>
+          </form>
+          <button commandfor="my-dialog" command="close">Close</button>
+        </dialog>
       </tbody>
-      <tfoot>
-        
-      </tfoot>
     </table>
   </body>
 </html>
