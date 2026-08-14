@@ -9,7 +9,7 @@ function Book(title, author, pages, read) {
   };
 }
 
-const myLibrary = [];
+let myLibrary = [];
 
 function addBookToLibrary(title, author, pages, read) {
   myLibrary.push(new Book(title, author, pages, read));
@@ -29,34 +29,46 @@ submitBtn.addEventListener("click", (event) => {
   let bookPages = pages.value;
   let bookRead = read.value;
   addBookToLibrary(bookTitle, bookAuthor, bookPages, bookRead);
-  console.log(myLibrary);
   displayEachBook(myLibrary);
+
+  title.value = "";
+  author.value = "";
+  pages.value = "";
+  read.value = "";
 });
 
 const booksBody = document.getElementById("books-body");
 
 function displayEachBook(myLibrary) {
-  for (let i = 0; i < myLibrary.length; i++) {
-    const row = document.createElement("tr");
-    const titleCell = document.createElement("td");
-    const authorCell = document.createElement("td");
-    const pagesCell = document.createElement("td");
-    const readCell = document.createElement("td");
+  const row = document.createElement("tr");
+  const titleCell = document.createElement("td");
+  const authorCell = document.createElement("td");
+  const pagesCell = document.createElement("td");
+  const readCell = document.createElement("td");
+  const removeCell = document.createElement("td");
+  const removeButton = document.createElement("button");
 
+  titleCell.textContent = myLibrary.at(-1).title;
+  authorCell.textContent = myLibrary.at(-1).author;
+  pagesCell.textContent = myLibrary.at(-1).pages;
+  readCell.textContent = myLibrary.at(-1).read;
+  removeButton.textContent = "Remove";
 
-    titleCell.textContent = myLibrary[i].title;
-    authorCell.textContent = myLibrary[i].author;
-    pagesCell.textContent = myLibrary[i].pages;
-    readCell.textContent = myLibrary[i].read;
+  removeButton.addEventListener("click", () => {
+    console.log("it is working");
+    myLibrary.splice(i, 1);
+    row.remove();
+    console.log(myLibrary);
+  });
 
-    row.appendChild(titleCell);
-    row.appendChild(authorCell);
-    row.appendChild(pagesCell);
-    row.appendChild(readCell);
+  row.appendChild(titleCell);
+  row.appendChild(authorCell);
+  row.appendChild(pagesCell);
+  row.appendChild(readCell);
+  row.appendChild(removeButton);
+  removeCell.appendChild(removeButton);
+  row.appendChild(removeCell);
 
-    booksBody.appendChild(row);
-
-  }
+  booksBody.appendChild(row);
+  console.log(myLibrary);
 }
-
-
