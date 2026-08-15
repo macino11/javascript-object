@@ -29,7 +29,7 @@ submitBtn.addEventListener("click", (event) => {
   let bookPages = pages.value;
   let bookRead = read.value;
   addBookToLibrary(bookTitle, bookAuthor, bookPages, bookRead);
-  displayEachBook(myLibrary);
+  displayNewBook(myLibrary);
 
   title.value = "";
   author.value = "";
@@ -39,7 +39,7 @@ submitBtn.addEventListener("click", (event) => {
 
 const booksBody = document.getElementById("books-body");
 
-function displayEachBook(myLibrary) {
+function displayNewBook() {
   const row = document.createElement("tr");
   const titleCell = document.createElement("td");
   const authorCell = document.createElement("td");
@@ -52,23 +52,24 @@ function displayEachBook(myLibrary) {
   authorCell.textContent = myLibrary.at(-1).author;
   pagesCell.textContent = myLibrary.at(-1).pages;
   readCell.textContent = myLibrary.at(-1).read;
+  removeButton.dataset.id = myLibrary.at(-1).id;
   removeButton.textContent = "Remove";
 
-  removeButton.addEventListener("click", () => {
-    console.log("it is working");
-    myLibrary.splice(i, 1);
-    row.remove();
-    console.log(myLibrary);
-  });
+  removeButton.addEventListener("click", (event) => {
+    myLibrary = myLibrary.filter(item => item.id !== event.target.dataset.id)
+    row.remove()
+    console.log(myLibrary)
+  })
 
   row.appendChild(titleCell);
   row.appendChild(authorCell);
   row.appendChild(pagesCell);
   row.appendChild(readCell);
-  row.appendChild(removeButton);
   removeCell.appendChild(removeButton);
   row.appendChild(removeCell);
 
   booksBody.appendChild(row);
-  console.log(myLibrary);
+  console.log(myLibrary)
 }
+
+
