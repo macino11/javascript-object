@@ -10,36 +10,14 @@ function Book(title, author, pages, read) {
 }
 
 let myLibrary = [];
+const booksBody = document.getElementById("books-body");
+const submitBtn = document.getElementById("submit-btn");
 
 function addBookToLibrary(title, author, pages, read) {
   myLibrary.push(new Book(title, author, pages, read));
 }
 
-const submitBtn = document.getElementById("submit-btn");
-
-const title = document.getElementById("title");
-const author = document.getElementById("author");
-const pages = document.getElementById("pages");
-const read = document.getElementById("read");
-
-submitBtn.addEventListener("click", (event) => {
-  event.preventDefault();
-  let bookTitle = title.value;
-  let bookAuthor = author.value;
-  let bookPages = pages.value;
-  let bookRead = read.value;
-  addBookToLibrary(bookTitle, bookAuthor, bookPages, bookRead);
-  displayNewBook(myLibrary);
-
-  title.value = "";
-  author.value = "";
-  pages.value = "";
-  read.value = "";
-});
-
-const booksBody = document.getElementById("books-body");
-
-function displayNewBook() {
+function displayOneBook(book) {
   const row = document.createElement("tr");
   const titleCell = document.createElement("td");
   const authorCell = document.createElement("td");
@@ -47,29 +25,51 @@ function displayNewBook() {
   const readCell = document.createElement("td");
   const removeCell = document.createElement("td");
   const removeButton = document.createElement("button");
+  const statusCell = document.createElement("td");
+  const statusButton = document.createElement("button");
 
-  titleCell.textContent = myLibrary.at(-1).title;
-  authorCell.textContent = myLibrary.at(-1).author;
-  pagesCell.textContent = myLibrary.at(-1).pages;
-  readCell.textContent = myLibrary.at(-1).read;
-  removeButton.dataset.id = myLibrary.at(-1).id;
+  titleCell.textContent = book.title;
+  authorCell.textContent = book.author;
+  pagesCell.textContent = book.pages;
+  readCell.textContent = book.read;
+  removeButton.dataset.id = book.id;
   removeButton.textContent = "Remove";
-
-  removeButton.addEventListener("click", (event) => {
-    myLibrary = myLibrary.filter(item => item.id !== event.target.dataset.id)
-    row.remove()
-    console.log(myLibrary)
-  })
+  statusButton.textContent = "Status";
 
   row.appendChild(titleCell);
   row.appendChild(authorCell);
   row.appendChild(pagesCell);
   row.appendChild(readCell);
+
   removeCell.appendChild(removeButton);
+  statusCell.appendChild(statusButton);
+
   row.appendChild(removeCell);
+  row.appendChild(statusCell);
 
   booksBody.appendChild(row);
-  console.log(myLibrary)
 }
 
+function displayAllBooks() {
+  myLibrary.forEach((book) => {
+    displayOneBook(book);
+  });
+}
 
+submitBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  addBookToLibrary(title.value, author.value, pages.value, read.value);
+  let oneBook = new Book(title.value, author.value, pages.value, read.value);
+  displayOneBook(oneBook);
+  title.value = "";
+  author.value = "";
+  pages.value = "";
+  read.value = "";
+});
+
+addBookToLibrary("hello", "me", 453, "read");
+addBookToLibrary("2", "hey", 453, "read");
+addBookToLibrary("3", "book 3", 3333, "read");
+addBookToLibrary("4", "me", 444, "read");
+
+displayAllBooks();
