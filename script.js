@@ -68,18 +68,10 @@ function displayAllBooks() {
 submitBtn.addEventListener("click", (e) => {
   e.preventDefault();
   addBookToLibrary(title.value, author.value, pages.value, read.value);
-  let oneBook = new Book(title.value, author.value, pages.value, read.value);
   displayAllBooks()
-//   displayOneBook(oneBook);
   title.value = "";
   author.value = "";
   pages.value = "";
   read.value = "";
 });
 
-addBookToLibrary("hello", "me", 453, "read");
-addBookToLibrary("2", "hey", 453, "read");
-addBookToLibrary("3", "book 3", 3333, "read");
-addBookToLibrary("4", "me", 444, "read");
-
-displayAllBooks();
