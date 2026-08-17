@@ -36,6 +36,14 @@ function displayOneBook(book) {
   removeButton.textContent = "Remove";
   statusButton.textContent = "Status";
 
+  removeButton.addEventListener("click", (event) => {
+    let newLibrary = myLibrary.filter(
+      (item) => item.id !== event.target.dataset.id,
+    );
+    myLibrary = newLibrary;
+    displayAllBooks();
+  });
+
   row.appendChild(titleCell);
   row.appendChild(authorCell);
   row.appendChild(pagesCell);
@@ -51,6 +59,7 @@ function displayOneBook(book) {
 }
 
 function displayAllBooks() {
+  booksBody.innerHTML = "";
   myLibrary.forEach((book) => {
     displayOneBook(book);
   });
@@ -60,7 +69,8 @@ submitBtn.addEventListener("click", (e) => {
   e.preventDefault();
   addBookToLibrary(title.value, author.value, pages.value, read.value);
   let oneBook = new Book(title.value, author.value, pages.value, read.value);
-  displayOneBook(oneBook);
+  displayAllBooks()
+//   displayOneBook(oneBook);
   title.value = "";
   author.value = "";
   pages.value = "";
