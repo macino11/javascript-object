@@ -49,18 +49,16 @@ function displayOneBook(book) {
   Book.prototype.toggleRead = function () {
     if (this.read === "read") {
       this.read = "not read yet";
-      
     } else if (this.read === "not read yet") {
       this.read = "read";
-      
     }
   };
 
   //Get the book's id and if it is same with the button's id then change the status
   statusButton.addEventListener("click", (event) => {
     if (book.id === event.target.dataset.id) {
-      book.toggleRead()
-        readCell.textContent = book.read
+      book.toggleRead();
+      readCell.textContent = book.read;
     }
   });
 
@@ -94,8 +92,3 @@ submitBtn.addEventListener("click", (e) => {
   pages.value = "";
   read.value = "";
 });
-
-addBookToLibrary("1", "2", "3", "read");
-addBookToLibrary("1", "2", "3", "not read yet");
-
-displayAllBooks();
