@@ -35,6 +35,7 @@ function displayOneBook(book) {
   removeButton.dataset.id = book.id;
   removeButton.textContent = "Remove";
   statusButton.textContent = "Status";
+  statusButton.dataset.id = book.id;
 
   removeButton.addEventListener("click", (event) => {
     let newLibrary = myLibrary.filter(
@@ -42,6 +43,25 @@ function displayOneBook(book) {
     );
     myLibrary = newLibrary;
     displayAllBooks();
+  });
+
+  //This changes the status
+  Book.prototype.toggleRead = function () {
+    if (this.read === "read") {
+      this.read = "not read yet";
+      
+    } else if (this.read === "not read yet") {
+      this.read = "read";
+      
+    }
+  };
+
+  //Get the book's id and if it is same with the button's id then change the status
+  statusButton.addEventListener("click", (event) => {
+    if (book.id === event.target.dataset.id) {
+      book.toggleRead()
+        readCell.textContent = book.read
+    }
   });
 
   row.appendChild(titleCell);
@@ -68,10 +88,14 @@ function displayAllBooks() {
 submitBtn.addEventListener("click", (e) => {
   e.preventDefault();
   addBookToLibrary(title.value, author.value, pages.value, read.value);
-  displayAllBooks()
+  displayAllBooks();
   title.value = "";
   author.value = "";
   pages.value = "";
   read.value = "";
 });
 
+addBookToLibrary("1", "2", "3", "read");
+addBookToLibrary("1", "2", "3", "not read yet");
+
+displayAllBooks();
