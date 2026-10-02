@@ -1,12 +1,15 @@
-function Book(title, author, pages, read) {
-  this.id = crypto.randomUUID();
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
-  this.info = function () {
+class Book{
+  constructor(title, author, pages, read) {
+    this.id = crypto.randomUUID();
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+  }
+
+  info () {
     return `${this.title} by ${this.author}, ${this.pages} pages, ${this.read}`;
-  };
+  }
 }
 
 let myLibrary = [];
