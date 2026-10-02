@@ -16,8 +16,11 @@ let myLibrary = [];
 const booksBody = document.getElementById("books-body");
 const submitBtn = document.getElementById("submit-btn");
 
-function addBookToLibrary(title, author, pages, read) {
-  myLibrary.push(new Book(title, author, pages, read));
+class addBookToLibrary{
+  constructor(title, author, pages, read) {
+    myLibrary.push(new Book(title, author, pages, read));
+  }
+  
 }
 
 function displayOneBook(book) {
@@ -88,7 +91,7 @@ function displayAllBooks() {
 
 submitBtn.addEventListener("click", (e) => {
   e.preventDefault();
-  addBookToLibrary(title.value, author.value, pages.value, read.value);
+  new addBookToLibrary(title.value, author.value, pages.value, read.value);
   displayAllBooks();
   title.value = "";
   author.value = "";
